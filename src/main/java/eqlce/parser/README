@@ -1,0 +1,9 @@
+Requirements:
+- Java 1.8
+- json-simple-1.1.jar (already in folder "lib" so just add as an external jar in the build Path of the project)
+
+Instructions for testing:
+- Place json file in folder "jsonFile" which is in folder "eql"
+- open java file "TestWithJsonFile.java" and set the name of file if needed. By default, there is an jsonFile file as input for testing named "jsonFileForSensorNetwork.json" 
+and put the name of output file (optional) (ex: mongoFile.mongo)
+- import it in eclipse as a java project and execute file "TestWithJsonFile.java"
