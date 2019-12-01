@@ -21,10 +21,12 @@ function uploadSingleFile(file) {
         console.log(xhr.responseText);
         var response = JSON.parse(xhr.responseText);
         if(xhr.status == 200) {
-	        	if(response.message == null)
+	        	if(response.response)
 	    		{
 	        		singleFileUploadError.style.display = "none";
-		            singleFileUploadSuccess.innerHTML = "<p>File Uploaded Successfully.</p><p>DownloadUrl : <a href='" + response.fileDownloadUri + "' target='_blank'>" + response.fileDownloadUri + "</a></p>";
+		            singleFileUploadSuccess.innerHTML = "<p>"+response.message+"</p><p>DownloadUrl : <a href='" 
+		            + response.fileDownloadUri + "' target='_blank'>" + response.fileDownloadUri + "</a></p>"
+		            +"<p>Click on this link and log as user 'eqlce' with password 'eqlce0' to see the result </p><p> <a href='https://www.mlab.com/databases/heroku_2cpz0mfq#collections' target='_blank'>https://www.mlab.com/databases/heroku_2cpz0mfq#collections</a></p>";
 		            singleFileUploadSuccess.style.display = "block";
 	    		}
 	    	else	{
@@ -54,14 +56,14 @@ function uploadMultipleFiles(files) {
         var response = JSON.parse(xhr.responseText);
         if(xhr.status == 200) {	
 		            multipleFileUploadError.style.display = "none";
-		            var content = "<p>All Files Uploaded Successfully</p>";
+		            var content = "<p>Click on this link and log as user 'eqlce' with pw 'eqlce0' to see the result </p><p> <a href='https://www.mlab.com/databases/heroku_2cpz0mfq#collections' target='_blank'>https://www.mlab.com/databases/heroku_2cpz0mfq#collections</a></p>";
 		            for(var i = 0; i < response.length; i++) {
-			            	if(response[i].message == null)
+			            	if(response[i].response)
 			        		{
-			            		content += "<p>DownloadUrl : <a href='" + response[i].fileDownloadUri + "' target='_blank'>" + response[i].fileDownloadUri + "</a></p>";
+			            		content += "<p>"+response[i].message+"</p><p>DownloadUrl : <a href='" + response[i].fileDownloadUri + "' target='_blank'>" + response[i].fileDownloadUri + "</a></p>";
 			        		}
 			            	else {
-			            		content +="<p>Unable to parse file : "+response[i].fileName+ "</p>";
+			            		content +="<p>"+response[i].message+response[i].fileName+ "</p>";
 			            		}
 		            }
 		            multipleFileUploadSuccess.innerHTML = content;

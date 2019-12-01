@@ -31,18 +31,24 @@ public class FileController {
     @PostMapping("/uploadFile")
     public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
     	if(file.getContentType().contentEquals("application/json")) {
-        String fileName = fileStorageService.storeFile(file);
-
-        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/downloadFile/")
-                .path(fileName)
-                .toUriString();
-       
-        return new UploadFileResponse(fileName, fileDownloadUri,
-                file.getContentType(), file.getSize(),null);
+	        String fileName = fileStorageService.storeFile(file);
+	
+	        if(fileName==null)
+	        {
+	        	return new UploadFileResponse(file.getOriginalFilename(), null,
+	                   null, 0,"No eql-ce query found in the file : "+file.getOriginalFilename(),false);
+	        }
+	        
+	        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+	                .path("/downloadFile/")
+	                .path(fileName)
+	                .toUriString();
+	       
+	        return new UploadFileResponse(fileName, fileDownloadUri,
+	                file.getContentType(), file.getSize(),"File parsed Successfully and executed  in mongoDB Successfully !",true);
     	}
     	else
-    		return new UploadFileResponse(file.getOriginalFilename(),null,null,0,"Unable to parse this file type !");
+    		return new UploadFileResponse(file.getOriginalFilename(),null,null,0,"Unable to parse this file type : ",false);
     }
 
     @PostMapping("/uploadMultipleFiles")

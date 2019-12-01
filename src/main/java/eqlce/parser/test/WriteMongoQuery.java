@@ -18,8 +18,8 @@ public class WriteMongoQuery {
 		try {
 			fw = new FileWriter(file, true);
 			bw = new BufferedWriter(fw);
-			bw.newLine();
 			bw.write(mongoQuery);
+			bw.newLine();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {

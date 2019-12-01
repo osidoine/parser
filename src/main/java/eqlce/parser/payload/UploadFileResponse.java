@@ -7,16 +7,18 @@ public class UploadFileResponse {
     private String fileType;
     private long size;
     private String message;
+    private boolean response;
 
-    public UploadFileResponse(String fileName, String fileDownloadUri, String fileType, long size,String message) {
+    public UploadFileResponse(String fileName, String fileDownloadUri, String fileType, long size,String message,boolean response) {
         this.fileName = fileName;
         this.fileDownloadUri = fileDownloadUri;
         this.fileType = fileType;
         this.size = size;
         this.message = message;
+        this.response = response;
     }
 
-    public String getFileName() {
+	public String getFileName() {
         return fileName;
     }
 
@@ -54,5 +56,13 @@ public class UploadFileResponse {
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+	
+	 public boolean isResponse() {
+			return response;
+		}
+
+	public void setResponse(boolean response) {
+			this.response = response;
 	}
 }

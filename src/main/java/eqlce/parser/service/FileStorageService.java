@@ -2,6 +2,7 @@ package eqlce.parser.service;
 
 import eqlce.parser.exception.FileStorageException;
 import eqlce.parser.exception.MyFileNotFoundException;
+import eqlce.parser.mongo.ExecuteMongoQuery;
 import eqlce.parser.property.FileStorageProperties;
 import eqlce.parser.test.JsonFileParser;
 
@@ -23,6 +24,7 @@ public class FileStorageService {
 
     private final Path fileStorageLocation;
     private JsonFileParser jsonFileParser = new JsonFileParser();
+    private ExecuteMongoQuery executeMongoQuery = new ExecuteMongoQuery();
 
     @Autowired
     public FileStorageService(FileStorageProperties fileStorageProperties) {
@@ -51,8 +53,18 @@ public class FileStorageService {
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
           
          String feedBack = jsonFileParser.parse(targetLocation.toString());
-        // System.out.println("feedBack : "+feedBack);
-        fileName = fileName.replace(".json", ".mongo");  
+        // System.out.println("feedBack : "+feedBack); 
+        
+        String mongoFile = targetLocation.toString().replace(".json", ".mongo");
+        Path path = Paths.get(mongoFile);
+
+        if(Files.exists(path)) {
+        	fileName = fileName.replace(".json", ".mongo");
+        	executeMongoQuery.executeMongoQuery(mongoFile);
+        }
+        else fileName = null;
+        
+        
          
             return fileName;
         } catch (IOException ex) {
