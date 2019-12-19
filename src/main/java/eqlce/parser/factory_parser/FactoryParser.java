@@ -16,7 +16,7 @@ public class FactoryParser {
 		//sensor_network_parser
 		if(context.contains("INSERT SCALAR OBSERVATION")|| context.contains("INSERT MEDIA OBSERVATION") || context.contains("INSERT PROPERTY")
 				|| context.contains("INSERT SENSOR")) 
-			parser =  new eqlce.parser.sensor_network_parser.CreateParser();
+			parser =  new eqlce.parser.sensor_network_parser.InsertParser();
 		else parser = null;
 		
 		return parser ;

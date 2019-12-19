@@ -63,8 +63,6 @@ public class FileStorageService {
         	executeMongoQuery.executeMongoQuery(mongoFile);
         }
         else fileName = null;
-        
-        
          
             return fileName;
         } catch (IOException ex) {

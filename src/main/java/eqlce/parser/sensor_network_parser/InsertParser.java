@@ -3,9 +3,9 @@ package eqlce.parser.sensor_network_parser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CreateParser extends SensorNetworkParser{
+public class InsertParser extends SensorNetworkParser{
 
-	public CreateParser() {
+	public InsertParser() {
 		// TODO Auto-generated constructor stub
 	}
 	
